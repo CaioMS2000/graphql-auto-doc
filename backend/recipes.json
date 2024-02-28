@@ -1,0 +1,72 @@
+{ "recipes": [
+    {
+      "id": 1,
+      "title": "Lasanha de Frango",
+      "description": "Uma deliciosa receita de lasanha com frango e molho branco.",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Massa de lasanha", "Frango desfiado", "Molho branco", "Queijo ralado"]
+    },
+    {
+      "id": 2,
+      "title": "Salada Caesar",
+      "description": "Uma refrescante salada Caesar com molho especial e croutons.",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Alface romana", "Frango grelhado", "Croutons", "Molho Caesar"]
+    },
+    {
+      "id": 3,
+      "title": "Sopa de Legumes",
+      "description": "Uma reconfortante sopa de legumes com uma variedade de vegetais frescos.",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Batata", "Cenoura", "Abóbora", "Brócolis", "Caldo de legumes"]
+    },
+    {
+      "id": 4,
+      "title": "Torta de Maçã",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Maçãs", "Massa folhada", "Açúcar", "Canela"]
+    },
+    {
+      "id": 5,
+      "title": "Risoto de Cogumelos",
+      "description": "Um risoto cremoso feito com cogumelos frescos e queijo parmesão.",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Arroz arbóreo", "Cogumelos", "Caldo de legumes", "Queijo parmesão"]
+    },
+    {
+      "id": 6,
+      "title": "Bolo de Chocolate",
+      "description": "Um bolo de chocolate úmido e delicioso coberto com ganache.",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Farinha de trigo", "Cacau em pó", "Açúcar", "Ovos", "Chocolate meio amargo"]
+    },
+    {
+      "id": 7,
+      "title": "Pão Caseiro",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Farinha de trigo", "Água", "Fermento biológico", "Sal"]
+    },
+    {
+      "id": 8,
+      "title": "Peixe Grelhado",
+      "description": "Um prato leve e saudável de peixe grelhado com temperos mediterrâneos.",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Filé de peixe", "Limão", "Azeite de oliva", "Tomate", "Manjericão"]
+    },
+    {
+      "id": 9,
+      "title": "Tacos Mexicanos",
+      "description": "Tacos mexicanos crocantes recheados com carne, alface e queijo.",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Tortillas de milho", "Carne moída", "Alface", "Queijo cheddar"]
+    },
+    {
+      "id": 10,
+      "title": "Muffins de Mirtilo",
+      "description": "Muffins fofos e saborosos repletos de mirtilos frescos.",
+      "creationDate": "2024-02-27T23:09:29.186Z",
+      "ingredients": ["Farinha de trigo", "Mirtilos", "Açúcar", "Leite", "Óleo vegetal"]
+    }
+  ]
+}
+  
