@@ -9,13 +9,27 @@ export default function Header({ children, className, ...rest }: HeaderProps) {
 			<div
 				{...rest}
 				className={
-					"w-full max-w-[100vw] p-1 bg-blue-700 text-white" + ` ${className}`
+					"flex justify-between w-full max-w-[100vw] p-1 bg-blue-700 text-white" +
+					` ${className}`
 				}
 			>
-				<p className="font-bold text-2xl inline-flex items-center gap-2">
-					<BsFileTextFill /> Sistema de Receitas
-				</p>
-				{children}
+				<a href="/">
+					<p className="font-bold text-2xl inline-flex items-center gap-2">
+						<BsFileTextFill /> Sistema de Receitas
+					</p>
+				</a>
+				<div className="menu flex gap-5 pr-2 text-lg font-bold">
+					<div className="option">
+						<a className="" href="/new-user">
+							Criar usuário
+						</a>
+					</div>
+					<div className="option">
+						<a className="" href="/new-recipe">
+							Criar receita
+						</a>
+					</div>
+				</div>
 			</div>
 		</>
 	);

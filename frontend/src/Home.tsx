@@ -1,8 +1,8 @@
-import "../style.css";
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
-import { allRecipesQueryDocument, allUsersQueryDocument } from "../lib/query";
-import { queryElement, queryElements } from "../utils/indext";
+import { allRecipesQueryDocument, allUsersQueryDocument } from "./lib/query";
+import { queryElement, queryElements } from "./utils/indext";
+import Header from "./components/Header";
 
 export default function Content() {
 	const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
@@ -37,8 +37,8 @@ export default function Content() {
 		});
 
 		if (selectedUserId) {
-			if (selectedUserId == userId){
-				setSelectedUserId(null)
+			if (selectedUserId == userId) {
+				setSelectedUserId(null);
 				return;
 			}
 		}
@@ -77,6 +77,7 @@ export default function Content() {
 
 	return (
 		<>
+			<Header />
 			<div
 				id="wrapper"
 				className="flex justify-center text-white p-1 gap-3 mt-10 max-w-[100vw]"
