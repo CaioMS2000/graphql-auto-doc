@@ -8,35 +8,42 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
+type Ingredient {
+  id: Float!
+  name: String!
+  recipes: [Recipe!]!
+}
+
 type Mutation {
   addRecipe(newRecipeData: NewRecipeInput!): Recipe!
 }
 
 input NewRecipeInput {
-  creationDate: DateTime!
   description: String
   ingredients: [String!]!
   title: String!
+  userId: Float!
 }
 
-scalar NumberOrString
-
 type Query {
-  recipe(id: String!): Recipe!
-  recipes(amount: Float!): [Recipe!]!
+  createUser: User!
+  recipe(id: Float!): Recipe!
+  recipes(amount: Float): [Recipe!]!
   users: [User!]!
 }
 
 type Recipe {
   creationDate: DateTime!
+  creator: User!
   description: String
-  id: NumberOrString!
-  ingredients: [String!]!
+  id: Float!
+  ingredients: [Ingredient!]!
   title: String!
+  userId: Float!
 }
 
 type User {
   email: String!
-  id: NumberOrString!
+  id: Float!
   name: String!
 }

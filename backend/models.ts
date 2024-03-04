@@ -25,8 +25,10 @@ const NumberOrStringScalar = new GraphQLScalarType({
 
 @ObjectType()
 export class User {
-  @Field(() => NumberOrStringScalar)
-  id: string|number;
+  // @Field(() => NumberOrStringScalar)
+  // id: string|number;
+  @Field()
+  id: number;
 
   @Field(() => String)
   name: string;
@@ -35,12 +37,12 @@ export class User {
   email: string;
 }
 
-const x = new User()
-
 @ObjectType()
 export class Recipe {
-  @Field(() => NumberOrStringScalar)
-  id: string|number;
+  // @Field(() => NumberOrStringScalar)
+  // id: string|number;
+  @Field()
+  id: number;
 
   @Field()
   title: string;
@@ -51,6 +53,26 @@ export class Recipe {
   @Field()
   creationDate: Date;
 
-  @Field(type => [String])
-  ingredients: string[];
+  @Field(type => [Ingredient])
+  ingredients: Ingredient[];
+
+  @Field()
+  userId: number;
+
+  @Field(() => User)
+  creator: User
+}
+
+@ObjectType()
+export class Ingredient {
+  // @Field(() => NumberOrStringScalar)
+  // id: string|number;
+  @Field()
+  id: number;
+
+  @Field()
+  name: string;
+
+  @Field(type => [Recipe])
+  recipes: Recipe[];
 }

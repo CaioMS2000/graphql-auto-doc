@@ -1,62 +1,72 @@
-import { readFileSync, writeFileSync } from "fs";
+import { PrismaClient } from '@prisma/client'
 import { Recipe, User } from "./models";
 import { randomUUID } from "node:crypto";
+import { NewRecipeInput } from './Inputs';
 
-export function GET_RECIPES() {
-  try {
-    const { recipes } = JSON.parse(readFileSync("recipes.json", "utf-8")) as {
-      recipes: Recipe[];
-    };
+export type NewUserType = Omit<User, "id">;
 
-    const recipesWithDateFix = recipes.map((recipe) => {
-      const transformed = new Date(recipe.creationDate);
+const prisma = new PrismaClient()
 
-      return { ...recipe, creationDate: transformed };
-    });
+export async function GET_RECIPES() {
+	try {
+		const recipes = await prisma.recipe.findMany()
 
-    return recipesWithDateFix;
-  } catch (error) {
-    console.log(error);
-  }
+    return recipes
+
+	} catch (error) {
+		console.log(error);
+	}
 }
 
-export function CREATE_RECIPE(newRecipe: Omit<Recipe, "id">) {
-  try {
-    writeFileSync(
-      "recipes.json",
-      JSON.stringify(
-        Array.from([...GET_RECIPES(), { ...newRecipe, id: randomUUID() }])
-      )
-    );
-  } catch (error) {
-    console.log(error);
-  }
+export async function CREATE_RECIPE(newRecipe: NewRecipeInput) {
+	try {
+		const NEWRECIPE = await prisma.recipe.create({data:{
+      description: newRecipe.description,
+      title: newRecipe.title,
+      ingredients: {
+        connectOrCreate: newRecipe.ingredients.map(ingredient => ({
+          create: {
+            name: ingredient
+          },
+          where: {
+            name: ingredient
+          }
+        }))
+      },
+      creator: {
+        connect: {
+          id: newRecipe.userId
+        }
+      }
+    }})
 
-  return GET_RECIPES();
+		return NEWRECIPE;
+	} catch (error) {
+		console.log(error);
+	}
 }
 
-export function GET_USERS() {
-  try {
-    const { users } = JSON.parse(readFileSync("users.json", "utf-8")) as {
-      users: User[];
-    };
-    return users;
-  } catch (error) {
-    console.log(error);
-  }
+export async function GET_USERS() {
+	try {
+		const users = await prisma.user.findMany()
+
+		return users;
+	} catch (error) {
+		console.log(error);
+	}
 }
 
-export function CREATE_USER(newUser: Omit<User, "id">) {
-  try {
-    writeFileSync(
-      "users.json",
-      JSON.stringify(
-        Array.from([...GET_USERS(), { ...newUser, id: randomUUID() }])
-      )
-    );
-  } catch (error) {
-    console.log(error);
-  }
+export async function CREATE_USER(newUser: NewUserType) {
+	try {
+		const NEWUSER = await prisma.user.create({
+			data: {
+				email: newUser.email,
+				name: newUser.name,
+			}
+		})
 
-  return GET_USERS();
+		return NEWUSER;
+	} catch (error) {
+		console.log(error);
+	}
 }

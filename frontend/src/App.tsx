@@ -1,27 +1,13 @@
-import "./style.css"
-import { useEffect, useState } from 'react'
-import { useQuery } from "@apollo/client"
-import { graphql } from "./gql"
+import Content from "./components/Content";
+import Header from "./components/Header";
 
 function App() {
-  const allRecipesQueryDocument = graphql(`
-    query GetRecipes ($amount: Float!) {
-      recipes(amount: $amount) {
-        id
-        title
-        description
-        creationDate
-        ingredients
-      }
-    }
-  `)
-  const { data, error } = useQuery(allRecipesQueryDocument, { variables: { amount: 5 } })
-  const recipes = data?.recipes
-
-  return (
-    <>
-    </>
-  )
+	return (
+		<>
+			<Header></Header>
+			<Content />
+		</>
+	);
 }
 
-export default App
+export default App;

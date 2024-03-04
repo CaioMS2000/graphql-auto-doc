@@ -16,7 +16,13 @@ export type Scalars = {
   Float: { input: number; output: number; }
   /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
   DateTime: { input: any; output: any; }
-  NumberOrString: { input: any; output: any; }
+};
+
+export type Ingredient = {
+  __typename?: 'Ingredient';
+  id: Scalars['Float']['output'];
+  name: Scalars['String']['output'];
+  recipes: Array<Recipe>;
 };
 
 export type Mutation = {
@@ -30,43 +36,60 @@ export type MutationAddRecipeArgs = {
 };
 
 export type NewRecipeInput = {
-  creationDate: Scalars['DateTime']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
   ingredients: Array<Scalars['String']['input']>;
   title: Scalars['String']['input'];
+  userId: Scalars['Float']['input'];
 };
 
 export type Query = {
   __typename?: 'Query';
+  createUser: User;
   recipe: Recipe;
   recipes: Array<Recipe>;
+  users: Array<User>;
 };
 
 
 export type QueryRecipeArgs = {
-  id: Scalars['String']['input'];
+  id: Scalars['Float']['input'];
 };
 
 
 export type QueryRecipesArgs = {
-  amount: Scalars['Float']['input'];
+  amount?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type Recipe = {
   __typename?: 'Recipe';
   creationDate: Scalars['DateTime']['output'];
+  creator: User;
   description?: Maybe<Scalars['String']['output']>;
-  id: Scalars['NumberOrString']['output'];
-  ingredients: Array<Scalars['String']['output']>;
+  id: Scalars['Float']['output'];
+  ingredients: Array<Ingredient>;
   title: Scalars['String']['output'];
+  userId: Scalars['Float']['output'];
+};
+
+export type User = {
+  __typename?: 'User';
+  email: Scalars['String']['output'];
+  id: Scalars['Float']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type GetRecipesQueryVariables = Exact<{
-  amount: Scalars['Float']['input'];
+  amount?: InputMaybe<Scalars['Float']['input']>;
 }>;
 
 
-export type GetRecipesQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'Recipe', id: any, title: string, description?: string | null, creationDate: any, ingredients: Array<string> }> };
+export type GetRecipesQuery = { __typename?: 'Query', recipes: Array<{ __typename?: 'Recipe', id: number, title: string, description?: string | null, creationDate: any, userId: number, ingredients: Array<{ __typename?: 'Ingredient', name: string }> }> };
+
+export type GetUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export const GetRecipesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRecipes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"amount"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"recipes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"amount"},"value":{"kind":"Variable","name":{"kind":"Name","value":"amount"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"creationDate"}},{"kind":"Field","name":{"kind":"Name","value":"ingredients"}}]}}]}}]} as unknown as DocumentNode<GetRecipesQuery, GetRecipesQueryVariables>;
+export type GetUsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', email: string, id: number, name: string }> };
+
+
+export const GetRecipesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetRecipes"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"amount"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Float"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"recipes"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"amount"},"value":{"kind":"Variable","name":{"kind":"Name","value":"amount"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"creationDate"}},{"kind":"Field","name":{"kind":"Name","value":"ingredients"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"userId"}}]}}]}}]} as unknown as DocumentNode<GetRecipesQuery, GetRecipesQueryVariables>;
+export const GetUsersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetUsers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"users"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<GetUsersQuery, GetUsersQueryVariables>;
