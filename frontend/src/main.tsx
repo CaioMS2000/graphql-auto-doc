@@ -7,6 +7,7 @@ import "./style.css";
 import { client } from "./lib/apollo.ts";
 import NewUser from "./NewUser.tsx";
 import Home from "./Home.tsx";
+import NewRecipe from "./NewRecipe.tsx";
 
 const router = createBrowserRouter([
 	{
@@ -15,11 +16,11 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/new-user",
-		element: <NewUser>Novo usuário</NewUser>,
+		element: <NewUser/>,
 	},
 	{
 		path: "/new-recipe",
-		element: <div>Nova receita</div>,
+		element: <NewRecipe/>,
 	},
 ]);
 
