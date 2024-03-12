@@ -14,8 +14,10 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n    mutation CreateUser($newUser: NewUserInput!) {\n        createUser(newUser: $newUser) {\n            email\n            id\n            name\n        }\n    }\n": types.CreateUserDocument,
+    "\n    mutation CreateRecipe($newRecipeData: NewRecipeInput!) {\n        addRecipe(newRecipeData: $newRecipeData) {\n            creationDate\n            creator {\n                email\n                id\n                name\n            }\n            description\n            id\n            userId\n            title\n            ingredients {\n                name\n                id\n            }\n        }\n    }\n": types.CreateRecipeDocument,
     "\n  query GetRecipes($amount: Float) {\n    recipes(amount: $amount) {\n      id\n      title\n      description\n      creationDate\n      ingredients{\n        name\n      }\n      userId\n    }\n  }\n": types.GetRecipesDocument,
     "\n  query GetUsers {\n    users {\n      email\n      id\n      name\n    }\n  }\n": types.GetUsersDocument,
+    "\n  query Ingredients {\n    ingredients {\n      id\n      name\n    }\n  }\n": types.IngredientsDocument,
 };
 
 /**
@@ -39,11 +41,19 @@ export function graphql(source: "\n    mutation CreateUser($newUser: NewUserInpu
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "\n    mutation CreateRecipe($newRecipeData: NewRecipeInput!) {\n        addRecipe(newRecipeData: $newRecipeData) {\n            creationDate\n            creator {\n                email\n                id\n                name\n            }\n            description\n            id\n            userId\n            title\n            ingredients {\n                name\n                id\n            }\n        }\n    }\n"): (typeof documents)["\n    mutation CreateRecipe($newRecipeData: NewRecipeInput!) {\n        addRecipe(newRecipeData: $newRecipeData) {\n            creationDate\n            creator {\n                email\n                id\n                name\n            }\n            description\n            id\n            userId\n            title\n            ingredients {\n                name\n                id\n            }\n        }\n    }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "\n  query GetRecipes($amount: Float) {\n    recipes(amount: $amount) {\n      id\n      title\n      description\n      creationDate\n      ingredients{\n        name\n      }\n      userId\n    }\n  }\n"): (typeof documents)["\n  query GetRecipes($amount: Float) {\n    recipes(amount: $amount) {\n      id\n      title\n      description\n      creationDate\n      ingredients{\n        name\n      }\n      userId\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query GetUsers {\n    users {\n      email\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  query GetUsers {\n    users {\n      email\n      id\n      name\n    }\n  }\n"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n  query Ingredients {\n    ingredients {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  query Ingredients {\n    ingredients {\n      id\n      name\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

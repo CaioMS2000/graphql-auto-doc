@@ -11,7 +11,7 @@ export const createUserQueryDocument = graphql(`
 `)
 
 export const createRecipeQueryDocument = graphql(`
-    mutation CreateUser($newRecipeData: NewRecipeInput!) {
+    mutation CreateRecipe($newRecipeData: NewRecipeInput!) {
         addRecipe(newRecipeData: $newRecipeData) {
             creationDate
             creator {

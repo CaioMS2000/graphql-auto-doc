@@ -10,7 +10,7 @@ import { PiTextTFill } from "react-icons/pi";
 import { FaBookBookmark } from "react-icons/fa6";
 import Header from "./components/Header";
 import { useQuery } from "@apollo/client";
-import { allUsersQueryDocument } from "./lib/query";
+import { allIngredientsQueryDocument, allUsersQueryDocument } from "./lib/query";
 import { InputIcon, InputRoot, InputTag } from "./components/Input";
 import Dropdown from "./components/Dropdown";
 import BaseDropdown from "./components/BaseDropdown";
@@ -23,6 +23,8 @@ export default function NewRecipe({ ...rest }: NewRecipeProps) {
 	const [ingredients, setIngredients] = useState<string[]>([]);
 	const { data: usersQueryData } = useQuery(allUsersQueryDocument);
 	const users = usersQueryData?.users;
+	const { data: ingredientsQueryData } = useQuery(allIngredientsQueryDocument);
+	const availableIngredients = ingredientsQueryData?.ingredients
 
 	function handleUserSelection(userId: number) {
 		console.log("clicked user", userId);
@@ -110,7 +112,7 @@ export default function NewRecipe({ ...rest }: NewRecipeProps) {
 								</div>
 
 								{/* <BaseDropdown /> */}
-								<Dropdown />
+								<Dropdown options={availableIngredients?availableIngredients.map(avIng => ({label: avIng.name, value: avIng.name})):[]} selectedOptionsSetter={setIngredients} selectedOptionsVariable={ingredients} />
 							</div>
 							<button
 								type="submit"
