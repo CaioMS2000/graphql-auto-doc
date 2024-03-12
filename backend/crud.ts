@@ -1,9 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { Recipe, User } from "./models";
 import { randomUUID } from "node:crypto";
-import { NewRecipeInput } from './Inputs';
-
-export type NewUserType = Omit<User, "id">;
+import { NewRecipeInput, NewUserInput } from './Inputs';
 
 const prisma = new PrismaClient()
 
@@ -56,7 +54,7 @@ export async function GET_USERS() {
 	}
 }
 
-export async function CREATE_USER(newUser: NewUserType) {
+export async function CREATE_USER(newUser: NewUserInput) {
 	try {
 		const NEWUSER = await prisma.user.create({
 			data: {
@@ -68,5 +66,15 @@ export async function CREATE_USER(newUser: NewUserType) {
 		return NEWUSER;
 	} catch (error) {
 		console.log(error);
+	}
+}
+
+export async function GET_INGREDIENTS(){
+	try {
+		const ingredients = await prisma.ingredient.findMany()
+
+		return ingredients
+	} catch (error) {
+		console.log(error)
 	}
 }

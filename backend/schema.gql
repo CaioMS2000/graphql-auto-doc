@@ -16,6 +16,7 @@ type Ingredient {
 
 type Mutation {
   addRecipe(newRecipeData: NewRecipeInput!): Recipe!
+  createUser(newUser: NewUserInput!): User!
 }
 
 input NewRecipeInput {
@@ -25,8 +26,13 @@ input NewRecipeInput {
   userId: Float!
 }
 
+input NewUserInput {
+  email: String!
+  name: String!
+}
+
 type Query {
-  createUser: User!
+  ingredients: [Ingredient!]!
   recipe(id: Float!): Recipe!
   recipes(amount: Float): [Recipe!]!
   users: [User!]!

@@ -24,3 +24,12 @@ export const allUsersQueryDocument = graphql(`
     }
   }
 `);
+
+export const allIngredientsQueryDocument = graphql(`
+  query Ingredients {
+    ingredients {
+      id
+      name
+    }
+  }
+`)

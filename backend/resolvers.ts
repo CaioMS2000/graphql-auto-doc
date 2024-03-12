@@ -1,7 +1,7 @@
 import { Arg, Ctx, FieldResolver, Mutation, Query, Resolver, Root } from "type-graphql";
-import { NewRecipeInput } from "./Inputs";
+import { NewRecipeInput, NewUserInput } from "./Inputs";
 import { Ingredient, Recipe, User } from "./models";
-import { CREATE_RECIPE, CREATE_USER, GET_RECIPES, GET_USERS, NewUserType } from "./crud";
+import { CREATE_RECIPE, CREATE_USER, GET_INGREDIENTS, GET_RECIPES, GET_USERS } from "./crud";
 import { PrismaClient } from "@prisma/client";
 
 @Resolver(Recipe)
@@ -62,13 +62,29 @@ export class UserResolver {
 		}
 	}
 	
-	@Query(() => User)
-	async createUser(newUser: NewUserType) {
+	@Mutation(() => User)
+	async createUser(@Arg('newUser') newUser: NewUserInput) {
+		console.log('newUser arrived')
+		console.log(newUser)
 		try {
 			const user = await CREATE_USER(newUser);
 			return user;
 		} catch (error) {
 			console.log(error);
+		}
+	}
+}
+
+@Resolver(Ingredient)
+export class IngredientResolver{
+	@Query(() => [Ingredient])
+	async ingredients(){
+		try {
+			const ingredients = await GET_INGREDIENTS()
+
+			return ingredients
+		} catch (error) {
+			console.log(error)
 		}
 	}
 }
