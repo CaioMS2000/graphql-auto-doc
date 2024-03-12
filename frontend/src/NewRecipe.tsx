@@ -7,7 +7,7 @@ import {
 } from "react";
 import { RiFileList2Fill } from "react-icons/ri";
 import { PiTextTFill } from "react-icons/pi";
-import { ImList } from "react-icons/im";
+import { FaBookBookmark } from "react-icons/fa6";
 import Header from "./components/Header";
 import { useQuery } from "@apollo/client";
 import { allUsersQueryDocument } from "./lib/query";
@@ -41,7 +41,7 @@ export default function NewRecipe({ ...rest }: NewRecipeProps) {
 			<Header />
 			<div
 				id="wrapper"
-				className="flex justify-center text-white p-1 gap-3 mt-10"
+				className="flex justify-center text-white p-1 gap-16 mt-10"
 			>
 				<div id="users" className="">
 					<div className="flex flex-col rounded-lg bg-zinc-900">
@@ -69,35 +69,45 @@ export default function NewRecipe({ ...rest }: NewRecipeProps) {
 				<div id="form-box" className="">
 					<form action="" onSubmit={handleSend}>
 						<div id="form-box" className="flex flex-col">
-							<div className="flex flex-col gap-3">
-								<InputRoot>
-									<InputIcon
-										element={RiFileList2Fill}
-										className="size-8 text-white"
-									/>
-									<InputTag
-										value={title}
-										onChange={(
-											e: ChangeEvent<HTMLInputElement>
-										) => {
-											console.log(e.target.value);
-										}}
-									/>
-								</InputRoot>
-								<InputRoot>
-									<InputIcon
-										element={PiTextTFill}
-										className="size-8 text-white"
-									/>
-									<InputTag
-										value={description}
-										onChange={(
-											e: ChangeEvent<HTMLInputElement>
-										) => {
-											console.log(e.target.value);
-										}}
-									/>
-								</InputRoot>
+							<div className="flex flex-col gap-3 items-center">
+								<div className="flex flex-col items-center">
+									<FaBookBookmark className="size-20 text-white mb-3" />
+									<p className="text-lg text-white font-bold">
+										Criando uma nova receita
+									</p>
+								</div>
+								<div className="flex gap-5">
+									<InputRoot>
+										<InputIcon
+											element={RiFileList2Fill}
+											className="size-8 text-white"
+										/>
+										<InputTag
+											value={title}
+											placeholder="Nome da receita"
+											onChange={(
+												e: ChangeEvent<HTMLInputElement>
+											) => {
+												console.log(e.target.value);
+											}}
+										/>
+									</InputRoot>
+									<InputRoot>
+										<InputIcon
+											element={PiTextTFill}
+											className="size-8 text-white"
+										/>
+										<InputTag
+											value={description}
+											placeholder="Descrição"
+											onChange={(
+												e: ChangeEvent<HTMLInputElement>
+											) => {
+												console.log(e.target.value);
+											}}
+										/>
+									</InputRoot>
+								</div>
 
 								{/* <BaseDropdown /> */}
 								<Dropdown />
