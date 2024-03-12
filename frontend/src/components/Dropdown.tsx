@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { FaCircle } from "react-icons/fa";
 import { ImCross, ImList } from "react-icons/im";
+import "../style.css";
 
 interface Option {
 	value: string;
 	label: string;
 }
 
-interface DropdownProps{
-	options: Option[]
-	selectedOptionsSetter: Function
-	selectedOptionsVariable: string[]
+interface DropdownProps {
+	options: Option[];
+	selectedOptionsSetter: Function;
+	selectedOptionsVariable: string[];
 }
 
-const Dropdown = ({options, selectedOptionsSetter, selectedOptionsVariable}: DropdownProps) => {
+const Dropdown = ({
+	options,
+	selectedOptionsSetter,
+	selectedOptionsVariable,
+}: DropdownProps) => {
 	const [isOpen, setIsOpen] = useState(false);
 	// const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
 	// const [options] = useState<Option[]>([
@@ -23,7 +28,9 @@ const Dropdown = ({options, selectedOptionsSetter, selectedOptionsVariable}: Dro
 	// ]);
 
 	const handleSelect = (option: Option) => {
-		const newSelectedOptions = selectedOptionsVariable.includes(option.value)
+		const newSelectedOptions = selectedOptionsVariable.includes(
+			option.value
+		)
 			? selectedOptionsVariable.filter((o) => o !== option.value)
 			: [...selectedOptionsVariable, option.value];
 		selectedOptionsSetter(newSelectedOptions);
@@ -34,9 +41,8 @@ const Dropdown = ({options, selectedOptionsSetter, selectedOptionsVariable}: Dro
 
 		if (flag) {
 			const filtered = selectedOptionsVariable.filter((o) => {
-
-				const res = o !== option.value
-				return res
+				const res = o !== option.value;
+				return res;
 			});
 			selectedOptionsSetter(filtered);
 		}
@@ -69,11 +75,15 @@ const Dropdown = ({options, selectedOptionsSetter, selectedOptionsVariable}: Dro
 						>
 							<ImCross className="text-red-400" />
 						</button>
-						<div className="px-4 py-1 flex flex-col gap-2">
+						<div
+							id="dropdown-options-wrapper"
+							className="px-4 py-1 flex flex-wrap min-w-80 max-w-[70vw] w-fit gap-2 max-h-52 overflow-scroll overflow-x-hidden"
+						>
 							{options.map((option) => {
-								const isSelected = selectedOptionsVariable.includes(
-									option.value
-								);
+								const isSelected =
+									selectedOptionsVariable.includes(
+										option.value
+									);
 								return (
 									<div
 										key={option.value}
@@ -106,7 +116,7 @@ const Dropdown = ({options, selectedOptionsSetter, selectedOptionsVariable}: Dro
 				</div>
 			)}
 
-			<div className="mt-1 flex flex-wrap gap-2 max-w-72">
+			<div className="mt-1 flex flex-wrap gap-2 max-w-72 md:max-w-[500px]">
 				{/* Opções Selecionadas:{" "} */}
 				{selectedOptionsVariable.map((option) => {
 					const foundOption = options.find((o) => o.value === option);
@@ -114,14 +124,12 @@ const Dropdown = ({options, selectedOptionsSetter, selectedOptionsVariable}: Dro
 						foundOption && (
 							<div
 								key={foundOption.value}
-								className="inline-flex items-center gap-2 p-2 text-[.8rem] border-2 border-blue-600 rounded-lg bg-blue-600 font-bold"
+								className="inline-flex items-center gap-2 p-2 text-[.8rem] border-2 border-blue-950 rounded-lg bg-blue-950 font-bold"
 							>
 								{foundOption.label}
 								<ImCross
 									className="text-red-400 cursor-pointer"
-									onClick={() =>
-										handleRemove(foundOption)
-									}
+									onClick={() => handleRemove(foundOption)}
 								/>
 							</div>
 						)

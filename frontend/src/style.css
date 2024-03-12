@@ -13,3 +13,52 @@ body{
     
     background-color: #2c2c2c;
 }
+
+#dropdown-options-wrapper{
+    /* Estilos da barra de rolagem (Webkit) */
+    &::-webkit-scrollbar {
+      /* Largura da barra */
+      width: 8px;
+
+      /* Altura da barra */
+      height: 8px;
+
+      /* Cor de fundo da barra */
+      background-color: transparent;
+
+      /* Arredondamento da barra */  
+      border-radius: 4px;
+    }
+    /* Estilo do indicador de scroll */
+    &::-webkit-scrollbar-thumb {
+      /* Cor do indicador */
+        background-color: #070707;
+
+      /* Arredondamento do indicador */
+      border-radius: 4px;
+    }
+  
+    /* Estilos da barra de rolagem (Firefox) */
+    &::-moz-scrollbar {
+      /* Largura da barra */
+      width: 8px;
+
+      /* Altura da barra */
+      height: 8px;
+
+      /* Cor de fundo da barra */
+      background-color: transparent;
+
+      /* Arredondamento da barra */
+      border-radius: 4px;
+    }
+    /* Estilo do indicador de scroll */
+    &::-moz-scrollbar-thumb {
+      /* Cor do indicador */
+        background-color: #070707;
+
+      /* Arredondamento do indicador */
+      border-radius: 4px;
+    }
+}
+  
